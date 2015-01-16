@@ -1,0 +1,12 @@
+[submodule "libs/ShortcutRecorder"]
+	path = libs/ShortcutRecorder
+	url = https://github.com/Kentzo/ShortcutRecorder.git
+[submodule "libs/SwiftHTTP"]
+	path = libs/SwiftHTTP
+	url = https://github.com/daltoniam/SwiftHTTP.git
+[submodule "libs/sskeychain"]
+	path = libs/sskeychain
+	url = https://github.com/soffes/sskeychain.git
+[submodule "libs/StartAtLoginController"]
+	path = libs/StartAtLoginController
+	url = https://github.com/alexzielenski/StartAtLoginController.git

@@ -1,0 +1,9 @@
+{
+  "name": "LanguageFetcher",
+  "version": "0.0.1",
+  "main": "index.js",
+  "dependencies": {
+    "unirest": "~0.1.7",
+    "js-yaml": "^3.2.5"
+  }
+}
