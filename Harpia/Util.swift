@@ -1,5 +1,5 @@
 import Foundation
-import SwiftHTTPOSX
+import SwiftHTTP
 
 class Util : NSObject {
     
@@ -10,7 +10,7 @@ class Util : NSObject {
         
         if let text = possibleContent {
             var jsonError: NSError?
-            let json = NSJSONSerialization.JSONObjectWithData(text.dataUsingEncoding(NSUTF8StringEncoding)!, options: nil, error: &jsonError) as NSDictionary
+            let json = NSJSONSerialization.JSONObjectWithData(text.dataUsingEncoding(NSUTF8StringEncoding)!, options: nil, error: &jsonError) as! NSDictionary
             return json
         }
         
@@ -53,11 +53,11 @@ class Util : NSObject {
         }
         
         var filename = "gistfile1.txt"
-        let selectedLanguage = NSUserDefaults.standardUserDefaults().objectForKey("DefaultLanguage") as String
+        let selectedLanguage = NSUserDefaults.standardUserDefaults().objectForKey("DefaultLanguage") as! String
         let selectedLanguageKey: AnyObject? = Util.getAppDelegate().languages.objectForKey(selectedLanguage)
         
         if (selectedLanguageKey != nil) {
-            filename = selectedLanguageKey as String
+            filename = selectedLanguageKey as! String
         }
         
         Util.createGist([filename: ["content": content]])
@@ -69,13 +69,13 @@ class Util : NSObject {
         let pasteboardItems:Array = pasteboard.readObjectsForClasses(possibleItemClasses, options: pasteboardOptions)!
         
         if (pasteboardItems.count == 1 && pasteboardItems[0].isKindOfClass(NSString.self) && pasteboardItems[0].length > 0) {
-            createGistFromString(pasteboardItems[0] as NSString)
+            createGistFromString(pasteboardItems[0] as! NSString)
         } else if (pasteboardItems.count > 0) {
             var files = Dictionary<String, AnyObject>()
             
             for sourceFile in pasteboardItems {
                 var error: NSError?
-                let fileContent = NSString(contentsOfURL: sourceFile as NSURL, encoding: NSUTF8StringEncoding, error: &error)
+                let fileContent = NSString(contentsOfURL: sourceFile as! NSURL, encoding: NSUTF8StringEncoding, error: &error)
                 
                 if (fileContent != nil && error == nil && fileContent?.length > 0) {
                     files.updateValue(["content": fileContent!], forKey: sourceFile.lastPathComponent)
@@ -97,37 +97,42 @@ class Util : NSObject {
         
         var request = Util.getRequest(true)
         
-        request.POST("https://api.github.com/gists", parameters: params, success: {(response: HTTPResponse) in
-            if let data = response.responseObject as? NSDictionary {
-                let dict: NSDictionary = response.responseObject as NSDictionary
+        request.POST("https://api.github.com/gists", parameters: params, completionHandler: {(response: HTTPResponse) in
+            if let err = response.error {
+                if (err.code == 401) {
+                    Util.displayAccessDenied()
+                }
+                
+                Util.displayError()
+            } else if let data = response.responseObject as? NSDictionary {
+                let dict: NSDictionary = response.responseObject as! NSDictionary
 
-                var str: String = dict["html_url"] as String
-                let gistId: String = dict["id"] as String
+                var str: String = dict["html_url"] as! String
+                let gistId: String = dict["id"] as! String
                 
                 let hasCredentials = dict["owner"] != nil
 
                 var shortenRequest = HTTPTask()
 
                 if (NSUserDefaults.standardUserDefaults().boolForKey("ShortenUrl")) {
-                    shortenRequest.POST("http://git.io", parameters: [ "url": str ], success: {(redirectresponse: HTTPResponse) in
+                    shortenRequest.POST("http://git.io", parameters: [ "url": str ], completionHandler: {(redirectresponse: HTTPResponse) in
+                        if let err = response.error {
+                            if (err.code == 401) {
+                                Util.displayError()
+                            }
+                            return
+                        }
+
                         if (redirectresponse.statusCode == 201) {
                             str = redirectresponse.headers!["Location"] as String!
                         }
                         
                         self.finishCreatingGist(str, gistId: gistId, files: files, hasCredentials: hasCredentials)
-                    }, failure: {(error: NSError, response: HTTPResponse?) in
-                        Util.displayError()
                     })
                 } else {
                     self.finishCreatingGist(str, gistId: gistId, files: files, hasCredentials: hasCredentials)
                 }
             }
-        }, failure: {(error: NSError, response: HTTPResponse?) in
-            if (error.code == 401) {
-                Util.displayAccessDenied()
-            }
-            
-            Util.displayError()
         })
         
     }
@@ -142,23 +147,23 @@ class Util : NSObject {
         
         let appDelegate = self.getAppDelegate()
         
-        var count = appDelegate.recentMenu?.itemArray.count
-        count = count! - 2
+        var menuCount = appDelegate.recentMenu?.itemArray.count
+        menuCount = menuCount! - 2
         
-        if (count >= 5) {
-            appDelegate.recentMenu?.removeItemAtIndex(count! - 1)
+        if (menuCount >= 5) {
+            appDelegate.recentMenu?.removeItemAtIndex(menuCount! - 1)
         }
         
         var menuTitle = ""
-        let dict = files as NSDictionary
+        let dict = files as! NSDictionary
         
         if (files.count > 1) {
-            menuTitle = ", ".join(dict.allKeys as [String])
+            menuTitle = ", ".join(dict.allKeys as! [String])
         } else {
-            menuTitle = dict.allValues[0]["content"] as String
+            menuTitle = dict.allValues[0]["content"] as! String
         }
         
-        if (countElements(menuTitle) > 45) {
+        if (count(menuTitle) > 45) {
             menuTitle = (menuTitle as NSString).substringToIndex(45) + "..."
         }
         
@@ -183,9 +188,16 @@ class Util : NSObject {
 
         let pasteBoard = NSPasteboard.generalPasteboard()
         
-        Util.getRequest(false).DELETE("https://api.github.com/gists/" + id, parameters: nil, success: {(response: HTTPResponse) in
+        Util.getRequest(false).DELETE("https://api.github.com/gists/" + id, parameters: nil, completionHandler: {(response: HTTPResponse) in
+            if let err = response.error {
+                if (err.code == 401) {
+                    Util.displayError()
+                }
+                return
+            }
+
             let appDelegate = self.getAppDelegate()
-            let menuItem = appDelegate.recentMenu?.itemWithTitle(url)?
+            let menuItem = appDelegate.recentMenu?.itemWithTitle(url)
             
             if (menuItem != nil) {
                 appDelegate.recentMenu?.removeItem(menuItem!)
@@ -196,12 +208,6 @@ class Util : NSObject {
             }
 
             return
-        }, failure: {(error: NSError, response: HTTPResponse?) in
-            if (error.code == 401) {
-                Util.displayAccessDenied()
-            }
-            
-            Util.displayError()
         })
     }
     
@@ -262,12 +268,12 @@ class Util : NSObject {
     
     
     class func removeNotification(timer: NSTimer) {        
-        let notification: NSUserNotification = timer.userInfo as NSUserNotification
+        let notification: NSUserNotification = timer.userInfo as! NSUserNotification
         NSUserNotificationCenter.defaultUserNotificationCenter().removeDeliveredNotification(notification)
     }
     
     class func getAppDelegate() -> AppDelegate {
-        return (NSApplication.sharedApplication().delegate as AppDelegate)
+        return (NSApplication.sharedApplication().delegate as! AppDelegate)
     }
     
     class func classFromType<T:NSObject>(type: T.Type) -> AnyObject! {
@@ -299,11 +305,11 @@ class Util : NSObject {
     }
     
     class func appVersion() -> String {
-        return NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as String
+        return NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
     }
     
     class func appBuild() -> String {
-        return NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleVersionKey as NSString) as String
+        return NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleVersionKey as String) as! String
     }
     
     class func versionBuild() -> String {
