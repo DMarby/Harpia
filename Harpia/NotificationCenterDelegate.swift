@@ -15,7 +15,7 @@ class NotificationCenterDelegate : NSObject, NSUserNotificationCenterDelegate {
     }
 
     func userNotificationCenter(center: NSUserNotificationCenter!, didActivateNotification notification: NSUserNotification!) {
-        let userInfo:Dictionary<String,String!> = notification.userInfo as Dictionary<String,String!>
+        let userInfo:Dictionary<String,String!> = notification.userInfo as! Dictionary<String,String!>
         
         if (notification.activationType == NSUserNotificationActivationType.ActionButtonClicked) {
             Util.deleteGist(userInfo["gistId"]!, url: userInfo["menuTitle"]!)

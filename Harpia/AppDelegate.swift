@@ -52,12 +52,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(aNotification: NSNotification) {
         NSUserDefaultsController.sharedUserDefaultsController().removeObserver(self, forKeyPath: "values.GlobalPaste")
         var recentGists = [Dictionary<String,String>]()
-        var recentGistsMenuItems = recentMenu.itemArray as [NSMenuItem]
+        var recentGistsMenuItems = recentMenu.itemArray as! [NSMenuItem]
         
         recentGistsMenuItems.removeRange(Range(start: recentGistsMenuItems.count - 2, end: recentGistsMenuItems.count))
         
         for item in recentGistsMenuItems {
-            recentGists.append(["title": item.title, "representedObject": item.representedObject as String])
+            recentGists.append(["title": item.title, "representedObject": item.representedObject as! String])
         }
         
         if (recentGists.count > 5) {
@@ -74,7 +74,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         recentMenu = NSMenu()
         
         if (recentGistsFromDefaults != nil) {
-            recentGists = recentGistsFromDefaults as [Dictionary<String, String>]
+            recentGists = recentGistsFromDefaults as! [Dictionary<String, String>]
         }
         
         if (recentGists.count > 5) {
@@ -180,7 +180,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func pressedLatestMenu(sender: AnyObject) {
-        let url = sender.representedObject as String
+        let url = sender.representedObject as! String
         NSWorkspace.sharedWorkspace().openURL(NSURL(string: url)!)
     }
     
@@ -203,13 +203,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if (keyPath == "values.GlobalPaste") {
             let hotKeyCenter = PTHotKeyCenter.sharedCenter()
             let oldHotKey = hotKeyCenter.hotKeyWithIdentifier(keyPath)
-            
+
             hotKeyCenter.unregisterHotKey(oldHotKey)
-            
+
             let newShortcut: NSDictionary? = object.valueForKeyPath(keyPath) as? NSDictionary
-            
+
             if (newShortcut != nil) {
-                let newHotKey: PTHotKey = PTHotKey(identifier: keyPath, keyCombo: newShortcut, target: self, action: Selector("pasteShortcut:"))
+                let newHotKey: PTHotKey = PTHotKey(identifier: keyPath, keyCombo: newShortcut as! [NSObject : AnyObject], target: self, action: Selector("pasteShortcut:"))
+                newHotKey.setAction(Selector("pasteShortcut:"))
+
                 hotKeyCenter.registerHotKey(newHotKey)
             }
         } else {

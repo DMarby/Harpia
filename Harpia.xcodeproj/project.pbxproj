@@ -106,12 +106,12 @@
 			remoteGlobalIDString = 2A4270C11A5601E700BFE736;
 			remoteInfo = EagleHelper;
 		};
-		2AA95FE31A3DF81B00002587 /* PBXContainerItemProxy */ = {
+		9AFC75F71B3DB68E009B9245 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A5D893E1A3DEB7100B2CFD9 /* SwiftHTTP.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = D958025819E6EEEB003C8218;
-			remoteInfo = SwiftHTTPOSX;
+			remoteGlobalIDString = 6BFD901519C8D8B500DD99B6;
+			remoteInfo = SwiftHTTP;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -348,10 +348,10 @@
 			buildRules = (
 			);
 			dependencies = (
+				9AFC75F81B3DB68E009B9245 /* PBXTargetDependency */,
 				2A8BB1D71A56105500F99DCF /* PBXTargetDependency */,
 				2A456FBF1A4B936D0021C18E /* PBXTargetDependency */,
 				2A456FC11A4B936D0021C18E /* PBXTargetDependency */,
-				2AA95FE41A3DF81B00002587 /* PBXTargetDependency */,
 			);
 			name = Harpia;
 			productName = Eagle;
@@ -369,7 +369,6 @@
 				TargetAttributes = {
 					2A4270C11A5601E700BFE736 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = V9RKJ597LL;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 1;
@@ -378,7 +377,6 @@
 					};
 					2A5D87CB1A3DCD1C00B2CFD9 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = V9RKJ597LL;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.Mac = {
 								enabled = 0;
@@ -550,10 +548,10 @@
 			target = 2A4270C11A5601E700BFE736 /* HarpiaHelper */;
 			targetProxy = 2A8BB1D61A56105500F99DCF /* PBXContainerItemProxy */;
 		};
-		2AA95FE41A3DF81B00002587 /* PBXTargetDependency */ = {
+		9AFC75F81B3DB68E009B9245 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = SwiftHTTPOSX;
-			targetProxy = 2AA95FE31A3DF81B00002587 /* PBXContainerItemProxy */;
+			name = SwiftHTTP;
+			targetProxy = 9AFC75F71B3DB68E009B9245 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

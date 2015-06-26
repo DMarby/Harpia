@@ -19,20 +19,20 @@ class PreferencesController: NSViewController, SRRecorderControlDelegate, SRVali
     @IBOutlet weak var globalPasteShortcutRecorder: SRRecorderControl!
     
     override func awakeFromNib() {
-        let languages = Util.getAppDelegate().languages.allKeys as [String]
+        let languages = Util.getAppDelegate().languages.allKeys as! [String]
         languagesList = languages.sorted { $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
         languagesList.insert("Text", atIndex: 0)
         
-        let selectedDefaultLanguage:Int = find(languagesList, NSUserDefaults.standardUserDefaults().objectForKey("DefaultLanguage") as String)!
+        let selectedDefaultLanguage:Int = find(languagesList, NSUserDefaults.standardUserDefaults().objectForKey("DefaultLanguage") as! String)!
         
         defaultLanguage.dataSource = self
         defaultLanguage.selectItemAtIndex(selectedDefaultLanguage)
         
-        copyLink.state = Util.loadPreferenceState(copyLink.identifier)
-        playSound.state = Util.loadPreferenceState(playSound.identifier)
-        displayNotification.state = Util.loadPreferenceState(displayNotification.identifier)
-        shortenUrls.state = Util.loadPreferenceState(shortenUrls.identifier)
-        launchAtLogin.state = Util.loadPreferenceState(launchAtLogin.identifier)
+        copyLink.state = Util.loadPreferenceState(copyLink.identifier!)
+        playSound.state = Util.loadPreferenceState(playSound.identifier!)
+        displayNotification.state = Util.loadPreferenceState(displayNotification.identifier!)
+        shortenUrls.state = Util.loadPreferenceState(shortenUrls.identifier!)
+        launchAtLogin.state = Util.loadPreferenceState(launchAtLogin.identifier!)
         
         authField.stringValue = Util.getCredentials()
         
@@ -45,7 +45,7 @@ class PreferencesController: NSViewController, SRRecorderControlDelegate, SRVali
     @IBAction func getCheckboxAction(sender : NSButton) {
         let state = sender.state == 0 ? false : true
         
-        NSUserDefaults.standardUserDefaults().setBool(state, forKey: sender.identifier)
+        NSUserDefaults.standardUserDefaults().setBool(state, forKey: sender.identifier!)
         NSUserDefaults.standardUserDefaults().synchronize()
         
         if (sender.identifier == makeSecret.identifier) {
@@ -83,7 +83,7 @@ class PreferencesController: NSViewController, SRRecorderControlDelegate, SRVali
 
     func comboBox(aComboBox: NSComboBox, completedString string: String) -> String? {
         for language in languagesList {
-            if (countElements(language.commonPrefixWithString(string, options: NSStringCompareOptions.CaseInsensitiveSearch)) == countElements(string)) {
+            if (count(language.commonPrefixWithString(string, options: NSStringCompareOptions.CaseInsensitiveSearch)) == count(string)) {
                 return language
             }
         }
@@ -110,11 +110,12 @@ class PreferencesController: NSViewController, SRRecorderControlDelegate, SRVali
         }
     }
 
-    func shortcutRecorder(aRecorder: SRRecorderControl!, canRecordShortcut aShortcut: NSDictionary!) -> Bool {
+    func shortcutRecorder(aRecorder: SRRecorderControl!, canRecordShortcut aShortcut: [NSObject : AnyObject]!) -> Bool {
         var error: NSError?
-        
-        var keyCode:UInt16 = UInt16(aShortcut.valueForKey(SRShortcutKeyCode) as Int)
-        var flagsTaken:UInt = UInt(aShortcut.valueForKey(SRShortcutModifierFlagsKey) as Int)
+        var shortcut = aShortcut as NSDictionary
+
+        var keyCode:UInt16 = UInt16(shortcut.valueForKey(SRShortcutKeyCode) as! Int)
+        var flagsTaken:UInt = UInt(shortcut.valueForKey(SRShortcutModifierFlagsKey) as! Int)
         
         let isTaken:Bool = validator.isKeyCode(keyCode, andFlagsTaken: flagsTaken, error: &error)
         
@@ -195,7 +196,7 @@ class PreferencesController: NSViewController, SRRecorderControlDelegate, SRVali
     
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
         if (keyPath == "values.PrivateGists") {
-            makeSecret!.state = Util.loadPreferenceState(makeSecret!.identifier)
+            makeSecret!.state = Util.loadPreferenceState(makeSecret!.identifier!)
         } else {
             super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
         }
