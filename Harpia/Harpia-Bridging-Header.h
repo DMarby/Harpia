@@ -7,6 +7,6 @@
 
 #import "StartAtLoginController.h"
 
-#import "SSKeychain.h"
+#import <SSKeychain/SSKeychain.h>
 
 #endif

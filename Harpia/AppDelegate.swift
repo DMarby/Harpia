@@ -210,7 +210,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
             if (newShortcut != nil) {
                 let newHotKey: PTHotKey = PTHotKey(identifier: keyPath, keyCombo: newShortcut as! [NSObject : AnyObject], target: self, action: Selector("pasteShortcut:"))
-                newHotKey.setAction(Selector("pasteShortcut:"))
 
                 hotKeyCenter.registerHotKey(newHotKey)
             }

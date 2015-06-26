@@ -26,13 +26,11 @@
 		2A8661271A5606EB0048484C /* HarpiaHelper.app in Copy helper app */ = {isa = PBXBuildFile; fileRef = 2A4270C21A5601E700BFE736 /* HarpiaHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2A8873471A55BB0900F6841C /* icon-error.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 2A8873451A55BB0900F6841C /* icon-error.pdf */; };
 		2A8873481A55BB0900F6841C /* icon-working.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 2A8873461A55BB0900F6841C /* icon-working.pdf */; };
-		2A9815AB1A54D0CB00CFCB66 /* SSKeychain.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2A9815A51A54D0CB00CFCB66 /* SSKeychain.strings */; };
-		2A9815AC1A54D0CB00CFCB66 /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A9815A81A54D0CB00CFCB66 /* SSKeychain.m */; };
-		2A9815AD1A54D0CB00CFCB66 /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A9815AA1A54D0CB00CFCB66 /* SSKeychainQuery.m */; };
 		2AA95FE11A3DF81B00002587 /* SwiftHTTPOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A5D894A1A3DEB7100B2CFD9 /* SwiftHTTPOSX.framework */; };
 		2AA95FE21A3DF81B00002587 /* SwiftHTTPOSX.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2A5D894A1A3DEB7100B2CFD9 /* SwiftHTTPOSX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2AEBFD171A5664EF00DF4694 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AEBFD161A5664EF00DF4694 /* Cocoa.framework */; };
 		2AF6FCC01A50DB5400316113 /* languages.json in Resources */ = {isa = PBXBuildFile; fileRef = 2AF6FCBF1A50DB5400316113 /* languages.json */; };
+		9AFC76111B3DBB65009B9245 /* SSKeychain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AFC760E1B3DBB5F009B9245 /* SSKeychain.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +111,34 @@
 			remoteGlobalIDString = 6BFD901519C8D8B500DD99B6;
 			remoteInfo = SwiftHTTP;
 		};
+		9AFC76091B3DBB5F009B9245 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9AFC76021B3DBB5F009B9245 /* SSKeychain.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E8A666341A844CC400287CA3;
+			remoteInfo = "SSKeychain iOS";
+		};
+		9AFC760B1B3DBB5F009B9245 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9AFC76021B3DBB5F009B9245 /* SSKeychain.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E8A666551A844D3A00287CA3;
+			remoteInfo = "SSKeychain iOS Tests";
+		};
+		9AFC760D1B3DBB5F009B9245 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9AFC76021B3DBB5F009B9245 /* SSKeychain.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E8A6666F1A844E4100287CA3;
+			remoteInfo = "SSKeychain Mac";
+		};
+		9AFC760F1B3DBB5F009B9245 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9AFC76021B3DBB5F009B9245 /* SSKeychain.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E8A666791A844E4100287CA3;
+			remoteInfo = "SSKeychain Mac Tests";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -167,13 +193,9 @@
 		2A8550C31A5DF26900B6A901 /* Harpia.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Harpia.entitlements; sourceTree = "<group>"; };
 		2A8873451A55BB0900F6841C /* icon-error.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "icon-error.pdf"; sourceTree = "<group>"; };
 		2A8873461A55BB0900F6841C /* icon-working.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "icon-working.pdf"; sourceTree = "<group>"; };
-		2A9815A61A54D0CB00CFCB66 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SSKeychain.strings; sourceTree = "<group>"; };
-		2A9815A71A54D0CB00CFCB66 /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
-		2A9815A81A54D0CB00CFCB66 /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
-		2A9815A91A54D0CB00CFCB66 /* SSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychainQuery.h; sourceTree = "<group>"; };
-		2A9815AA1A54D0CB00CFCB66 /* SSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychainQuery.m; sourceTree = "<group>"; };
 		2AEBFD161A5664EF00DF4694 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		2AF6FCBF1A50DB5400316113 /* languages.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = languages.json; sourceTree = "<group>"; };
+		9AFC76021B3DBB5F009B9245 /* SSKeychain.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SSKeychain.xcodeproj; path = libs/sskeychain/SSKeychain.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +211,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AFC76111B3DBB65009B9245 /* SSKeychain.framework in Frameworks */,
 				2A4270B21A55F69500BFE736 /* ServiceManagement.framework in Frameworks */,
 				2A5A4F1A1A488C8400F7D2FD /* PTHotKey.framework in Frameworks */,
 				2A27977C1A483EDB00DAAB04 /* ShortcutRecorder.framework in Frameworks */,
@@ -240,10 +263,10 @@
 		2A5D87C31A3DCD1C00B2CFD9 = {
 			isa = PBXGroup;
 			children = (
+				9AFC76021B3DBB5F009B9245 /* SSKeychain.xcodeproj */,
 				2AEBFD161A5664EF00DF4694 /* Cocoa.framework */,
 				2A4270B61A55F96C00BFE736 /* StartAtLoginController */,
 				2A4270B11A55F69500BFE736 /* ServiceManagement.framework */,
-				2A9815A41A54D0CB00CFCB66 /* SSKeychain */,
 				2A27975F1A478EF800DAAB04 /* ShortcutRecorder.xcodeproj */,
 				2A5D893E1A3DEB7100B2CFD9 /* SwiftHTTP.xcodeproj */,
 				2A5D88891A3DDCC900B2CFD9 /* Main.storyboard */,
@@ -302,17 +325,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2A9815A41A54D0CB00CFCB66 /* SSKeychain */ = {
+		9AFC76031B3DBB5F009B9245 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2A9815A51A54D0CB00CFCB66 /* SSKeychain.strings */,
-				2A9815A71A54D0CB00CFCB66 /* SSKeychain.h */,
-				2A9815A81A54D0CB00CFCB66 /* SSKeychain.m */,
-				2A9815A91A54D0CB00CFCB66 /* SSKeychainQuery.h */,
-				2A9815AA1A54D0CB00CFCB66 /* SSKeychainQuery.m */,
+				9AFC760A1B3DBB5F009B9245 /* SSKeychain.framework */,
+				9AFC760C1B3DBB5F009B9245 /* SSKeychain iOS Tests.xctest */,
+				9AFC760E1B3DBB5F009B9245 /* SSKeychain.framework */,
+				9AFC76101B3DBB5F009B9245 /* SSKeychain Mac Tests.xctest */,
 			);
-			name = SSKeychain;
-			path = libs/sskeychain/SSKeychain;
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -417,6 +438,10 @@
 					ProjectRef = 2A27975F1A478EF800DAAB04 /* ShortcutRecorder.xcodeproj */;
 				},
 				{
+					ProductGroup = 9AFC76031B3DBB5F009B9245 /* Products */;
+					ProjectRef = 9AFC76021B3DBB5F009B9245 /* SSKeychain.xcodeproj */;
+				},
+				{
 					ProductGroup = 2A5D893F1A3DEB7100B2CFD9 /* Products */;
 					ProjectRef = 2A5D893E1A3DEB7100B2CFD9 /* SwiftHTTP.xcodeproj */;
 				},
@@ -479,6 +504,34 @@
 			remoteRef = 2A5D894B1A3DEB7100B2CFD9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		9AFC760A1B3DBB5F009B9245 /* SSKeychain.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SSKeychain.framework;
+			remoteRef = 9AFC76091B3DBB5F009B9245 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9AFC760C1B3DBB5F009B9245 /* SSKeychain iOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SSKeychain iOS Tests.xctest";
+			remoteRef = 9AFC760B1B3DBB5F009B9245 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9AFC760E1B3DBB5F009B9245 /* SSKeychain.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SSKeychain.framework;
+			remoteRef = 9AFC760D1B3DBB5F009B9245 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9AFC76101B3DBB5F009B9245 /* SSKeychain Mac Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SSKeychain Mac Tests.xctest";
+			remoteRef = 9AFC760F1B3DBB5F009B9245 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -497,7 +550,6 @@
 				2A5D888A1A3DDCC900B2CFD9 /* Main.storyboard in Resources */,
 				2A8873481A55BB0900F6841C /* icon-working.pdf in Resources */,
 				2AF6FCC01A50DB5400316113 /* languages.json in Resources */,
-				2A9815AB1A54D0CB00CFCB66 /* SSKeychain.strings in Resources */,
 				2A5D87D61A3DCD1C00B2CFD9 /* Images.xcassets in Resources */,
 				2A5D87EF1A3DCE8700B2CFD9 /* icon.pdf in Resources */,
 			);
@@ -521,9 +573,7 @@
 				2A456F841A4B55A80021C18E /* StatusItemViewDelegate.swift in Sources */,
 				2A456F8C1A4B58900021C18E /* NotificationCenterDelegate.swift in Sources */,
 				2A4270BD1A55F96C00BFE736 /* StartAtLoginController.m in Sources */,
-				2A9815AC1A54D0CB00CFCB66 /* SSKeychain.m in Sources */,
 				2A5A4F161A484B8C00F7D2FD /* PreferencesController.swift in Sources */,
-				2A9815AD1A54D0CB00CFCB66 /* SSKeychainQuery.m in Sources */,
 				2A5A506A1A4B4E0A00F7D2FD /* Util.swift in Sources */,
 				2A5D87D21A3DCD1C00B2CFD9 /* AppDelegate.swift in Sources */,
 				2A456FB91A4B601A0021C18E /* ServicesProvider.swift in Sources */,
@@ -554,17 +604,6 @@
 			targetProxy = 9AFC75F71B3DB68E009B9245 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		2A9815A51A54D0CB00CFCB66 /* SSKeychain.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2A9815A61A54D0CB00CFCB66 /* en */,
-			);
-			name = SSKeychain.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		2A4270DD1A5601E800BFE736 /* Debug */ = {
@@ -693,6 +732,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs",
+					"$(PROJECT_DIR)/libs/sskeychain/build/Debug",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				HEADER_SEARCH_PATHS = (
@@ -725,6 +765,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/libs",
+					"$(PROJECT_DIR)/libs/sskeychain/build/Debug",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = "NDEBUG=0";
 				HEADER_SEARCH_PATHS = (
