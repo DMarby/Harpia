@@ -115,7 +115,7 @@ class Util : NSObject {
                 var shortenRequest = HTTPTask()
 
                 if (NSUserDefaults.standardUserDefaults().boolForKey("ShortenUrl")) {
-                    shortenRequest.POST("http://git.io", parameters: [ "url": str ], completionHandler: {(redirectresponse: HTTPResponse) in
+                    shortenRequest.POST("https://git.io", parameters: [ "url": str ], completionHandler: {(redirectresponse: HTTPResponse) in
                         if let err = response.error {
                             if (err.code == 401) {
                                 Util.displayError()
